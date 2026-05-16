@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Fraud Detection System</title>
+    <meta
+      name="description"
+      content="AI Fraud Detection System using XGBoost, Random Forest, and LSTM models for financial transaction fraud classification."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="#top">AI Fraud Detection</a>
+        <div class="nav-links">
+          <a href="#results">Results</a>
+          <a href="#workflow">Workflow</a>
+          <a href="#demo">Demo</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-content">
+          <p class="eyebrow">Machine learning for transaction risk analysis</p>
+          <h1>AI Fraud Detection System</h1>
+          <p class="hero-copy">
+            A Python-based fraud detection project that compares XGBoost,
+            Random Forest, and LSTM models on financial transaction behavior to
+            identify suspicious activity.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#results">View Results</a>
+            <a class="button secondary" href="#demo">Run Locally</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="Fraud detection model chart">
+          <img src="Figure_1%20fraud%20ai.png" alt="Fraud detection AI result chart" />
+        </div>
+      </section>
+
+      <section class="stats" aria-label="Model accuracy results">
+        <div>
+          <span>99.48%</span>
+          <p>XGBoost Accuracy</p>
+        </div>
+        <div>
+          <span>99.40%</span>
+          <p>Random Forest Accuracy</p>
+        </div>
+        <div>
+          <span>99.32%</span>
+          <p>LSTM Accuracy</p>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <div class="section-heading">
+          <p class="eyebrow">Project Overview</p>
+          <h2>Detecting fraud from transaction patterns</h2>
+        </div>
+        <div class="overview-grid">
+          <article>
+            <h3>Problem</h3>
+            <p>
+              Financial fraud can hide inside high-volume transaction logs. This
+              project trains AI models to classify whether a transaction is
+              fraudulent using balance changes and transaction amount.
+            </p>
+          </article>
+          <article>
+            <h3>Dataset</h3>
+            <p>
+              The model uses a labeled financial transaction dataset with fraud
+              indicators and numeric transaction features.
+            </p>
+          </article>
+          <article>
+            <h3>Application</h3>
+            <p>
+              A Streamlit interface lets users enter transaction details and
+              receive a fraud-risk prediction.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section muted" id="workflow">
+        <div class="section-heading">
+          <p class="eyebrow">Model Pipeline</p>
+          <h2>From raw transaction data to prediction</h2>
+        </div>
+        <div class="timeline">
+          <div>
+            <strong>1</strong>
+            <h3>Load Data</h3>
+            <p>Read financial transaction records from the CSV dataset.</p>
+          </div>
+          <div>
+            <strong>2</strong>
+            <h3>Select Features</h3>
+            <p>
+              Use amount, origin balances, and destination balances as model
+              inputs.
+            </p>
+          </div>
+          <div>
+            <strong>3</strong>
+            <h3>Train Models</h3>
+            <p>Compare XGBoost, Random Forest, and LSTM neural network models.</p>
+          </div>
+          <div>
+            <strong>4</strong>
+            <h3>Evaluate</h3>
+            <p>Measure accuracy, confusion matrix behavior, and feature impact.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="results">
+        <div class="section-heading">
+          <p class="eyebrow">Results</p>
+          <h2>Performance and model insight</h2>
+        </div>
+        <div class="result-grid">
+          <figure>
+            <img src="fraud_confusion_matrix.png" alt="Fraud detection confusion matrix" />
+            <figcaption>Confusion matrix for fraud classification results.</figcaption>
+          </figure>
+          <figure class="wide">
+            <img src="lstm.png" alt="LSTM model training result" />
+            <figcaption>LSTM neural network training output and accuracy.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section muted" id="features">
+        <div class="section-heading">
+          <p class="eyebrow">Input Features</p>
+          <h2>Signals used by the model</h2>
+        </div>
+        <div class="feature-list">
+          <span>amount</span>
+          <span>oldbalanceOrg</span>
+          <span>newbalanceOrig</span>
+          <span>oldbalanceDest</span>
+          <span>newbalanceDest</span>
+        </div>
+      </section>
+
+      <section class="section demo" id="demo">
+        <div>
+          <p class="eyebrow">Local Demo</p>
+          <h2>Run the project</h2>
+          <p>
+            Train the model with Python, then launch the Streamlit app to test
+            sample transaction inputs.
+          </p>
+        </div>
+        <div class="code-panel" aria-label="Project commands">
+          <code>python3 main.py</code>
+          <code>streamlit run app.py</code>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Built with Python, XGBoost, TensorFlow, Scikit-learn, Streamlit, Pandas, and Matplotlib.</p>
+    </footer>
+  </body>
+</html>
