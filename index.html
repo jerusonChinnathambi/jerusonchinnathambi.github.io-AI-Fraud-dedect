@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Fraud Detection System</title>
+    <meta
+      name="description"
+      content="AI Fraud Detection System using XGBoost, Random Forest, and LSTM models for financial transaction fraud classification."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="nav" aria-label="Main navigation">
+        <a class="brand" href="#top">AI Fraud Detection</a>
+        <div class="nav-links">
+          <a href="#predictor">Predict</a>
+          <a href="#results">Results</a>
+          <a href="#workflow">Workflow</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-content">
+          <p class="eyebrow">Machine learning for transaction risk analysis</p>
+          <h1>AI Fraud Detection System</h1>
+          <p class="hero-copy">
+            Enter transaction values and receive an instant fraud-risk decision.
+            The demo uses the same transaction signals as the Python model:
+            amount, sender balance changes, and receiver balance changes.
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#predictor">Try Predictor</a>
+            <a class="button secondary" href="#results">View Results</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-label="Fraud detection model chart">
+          <img src="Figure_1%20fraud%20ai.png" alt="Fraud detection AI result chart" />
+        </div>
+      </section>
+
+      <section class="section predictor-section" id="predictor">
+        <div class="section-heading">
+          <p class="eyebrow">Live Fraud Check</p>
+          <h2>Test a transaction instantly</h2>
+          <p>
+            Add numeric transaction values below. The browser model estimates
+            fraud risk from balance inconsistencies, account drain behavior, and
+            transaction size.
+          </p>
+        </div>
+
+        <div class="predictor">
+          <form class="predictor-form" id="fraudForm">
+            <label>
+              Transaction amount
+              <input
+                id="amount"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="Example: 181000"
+                required
+              />
+            </label>
+            <label>
+              Old balance origin
+              <input
+                id="oldbalanceOrg"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="Example: 181000"
+                required
+              />
+            </label>
+            <label>
+              New balance origin
+              <input
+                id="newbalanceOrig"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="Example: 0"
+                required
+              />
+            </label>
+            <label>
+              Old balance destination
+              <input
+                id="oldbalanceDest"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="Example: 0"
+                required
+              />
+            </label>
+            <label>
+              New balance destination
+              <input
+                id="newbalanceDest"
+                type="number"
+                min="0"
+                step="0.01"
+                placeholder="Example: 181000"
+                required
+              />
+            </label>
+            <div class="form-actions">
+              <button class="button primary" type="submit">Detect Fraud</button>
+              <button class="button secondary" type="button" id="sampleFraud">
+                Fraud Sample
+              </button>
+              <button class="button secondary" type="button" id="sampleSafe">
+                Safe Sample
+              </button>
+            </div>
+          </form>
+
+          <aside class="prediction-card" id="predictionCard" aria-live="polite">
+            <p class="result-label">Prediction</p>
+            <h3 id="predictionTitle">Enter values to start</h3>
+            <div class="risk-meter" aria-label="Fraud risk score">
+              <span id="riskFill"></span>
+            </div>
+            <p class="risk-score" id="riskScore">Risk score: --%</p>
+            <ul class="signal-list" id="signalList">
+              <li>Balance movement and transaction amount will appear here.</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section class="stats" aria-label="Model accuracy results">
+        <div>
+          <span>99.48%</span>
+          <p>XGBoost Accuracy</p>
+        </div>
+        <div>
+          <span>99.40%</span>
+          <p>Random Forest Accuracy</p>
+        </div>
+        <div>
+          <span>99.32%</span>
+          <p>LSTM Accuracy</p>
+        </div>
+      </section>
+
+      <section class="section" id="overview">
+        <div class="section-heading">
+          <p class="eyebrow">Project Overview</p>
+          <h2>Detecting fraud from transaction patterns</h2>
+        </div>
+        <div class="overview-grid">
+          <article>
+            <h3>Problem</h3>
+            <p>
+              Financial fraud can hide inside high-volume transaction logs. This
+              project trains AI models to classify whether a transaction is
+              fraudulent using balance changes and transaction amount.
+            </p>
+          </article>
+          <article>
+            <h3>Dataset</h3>
+            <p>
+              The model uses a labeled financial transaction dataset with fraud
+              indicators and numeric transaction features.
+            </p>
+          </article>
+          <article>
+            <h3>Application</h3>
+            <p>
+              A Streamlit interface lets users enter transaction details and
+              receive a fraud-risk prediction.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section muted" id="workflow">
+        <div class="section-heading">
+          <p class="eyebrow">Model Pipeline</p>
+          <h2>From raw transaction data to prediction</h2>
+        </div>
+        <div class="timeline">
+          <div>
+            <strong>1</strong>
+            <h3>Load Data</h3>
+            <p>Read financial transaction records from the CSV dataset.</p>
+          </div>
+          <div>
+            <strong>2</strong>
+            <h3>Select Features</h3>
+            <p>
+              Use amount, origin balances, and destination balances as model
+              inputs.
+            </p>
+          </div>
+          <div>
+            <strong>3</strong>
+            <h3>Train Models</h3>
+            <p>Compare XGBoost, Random Forest, and LSTM neural network models.</p>
+          </div>
+          <div>
+            <strong>4</strong>
+            <h3>Evaluate</h3>
+            <p>Measure accuracy, confusion matrix behavior, and feature impact.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="results">
+        <div class="section-heading">
+          <p class="eyebrow">Results</p>
+          <h2>Performance and model insight</h2>
+        </div>
+        <div class="result-grid">
+          <figure>
+            <img src="fraud_confusion_matrix.png" alt="Fraud detection confusion matrix" />
+            <figcaption>Confusion matrix for fraud classification results.</figcaption>
+          </figure>
+          <figure class="wide">
+            <img src="lstm.png" alt="LSTM model training result" />
+            <figcaption>LSTM neural network training output and accuracy.</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="section muted" id="features">
+        <div class="section-heading">
+          <p class="eyebrow">Input Features</p>
+          <h2>Signals used by the model</h2>
+        </div>
+        <div class="feature-list">
+          <span>amount</span>
+          <span>oldbalanceOrg</span>
+          <span>newbalanceOrig</span>
+          <span>oldbalanceDest</span>
+          <span>newbalanceDest</span>
+        </div>
+      </section>
+
+      <section class="section demo" id="demo">
+        <div>
+          <p class="eyebrow">Local Demo</p>
+          <h2>Run the project</h2>
+          <p>
+            Train the model with Python, then launch the Streamlit app to test
+            sample transaction inputs.
+          </p>
+        </div>
+        <div class="code-panel" aria-label="Project commands">
+          <code>python3 main.py</code>
+          <code>streamlit run app.py</code>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>Built with Python, XGBoost, TensorFlow, Scikit-learn, Streamlit, Pandas, and Matplotlib.</p>
+    </footer>
+    <script>
+      const form = document.querySelector("#fraudForm");
+      const fields = {
+        amount: document.querySelector("#amount"),
+        oldbalanceOrg: document.querySelector("#oldbalanceOrg"),
+        newbalanceOrig: document.querySelector("#newbalanceOrig"),
+        oldbalanceDest: document.querySelector("#oldbalanceDest"),
+        newbalanceDest: document.querySelector("#newbalanceDest")
+      };
+      const predictionCard = document.querySelector("#predictionCard");
+      const predictionTitle = document.querySelector("#predictionTitle");
+      const riskFill = document.querySelector("#riskFill");
+      const riskScore = document.querySelector("#riskScore");
+      const signalList = document.querySelector("#signalList");
+
+      function money(value) {
+        return value.toLocaleString("en-US", {
+          maximumFractionDigits: 2
+        });
+      }
+
+      function clamp(value, min, max) {
+        return Math.min(Math.max(value, min), max);
+      }
+
+      function readValues() {
+        return {
+          amount: Number(fields.amount.value),
+          oldbalanceOrg: Number(fields.oldbalanceOrg.value),
+          newbalanceOrig: Number(fields.newbalanceOrig.value),
+          oldbalanceDest: Number(fields.oldbalanceDest.value),
+          newbalanceDest: Number(fields.newbalanceDest.value)
+        };
+      }
+
+      function scoreTransaction(values) {
+        const originDrop = values.oldbalanceOrg - values.newbalanceOrig;
+        const destinationGain = values.newbalanceDest - values.oldbalanceDest;
+        const originMatchesAmount = Math.abs(originDrop - values.amount);
+        const destinationMatchesAmount = Math.abs(destinationGain - values.amount);
+        const tolerance = Math.max(values.amount * 0.08, 100);
+        let score = 8;
+        const signals = [];
+
+        if (values.amount <= 0) {
+          return {
+            score: 0,
+            signals: ["Transaction amount must be greater than zero."]
+          };
+        }
+
+        if (values.amount >= 100000) {
+          score += 24;
+          signals.push(`Large transaction amount: ${money(values.amount)}.`);
+        } else if (values.amount >= 25000) {
+          score += 12;
+          signals.push(`Moderate transaction amount: ${money(values.amount)}.`);
+        } else {
+          signals.push(`Transaction amount is low: ${money(values.amount)}.`);
+        }
+
+        if (values.newbalanceOrig === 0 && values.oldbalanceOrg > 0) {
+          score += 28;
+          signals.push("Origin account is drained to zero after the transaction.");
+        }
+
+        if (Math.abs(originDrop - values.amount) <= tolerance && originDrop > 0) {
+          score += 18;
+          signals.push("Origin balance drop closely matches the transaction amount.");
+        } else if (originDrop < 0) {
+          score -= 10;
+          signals.push("Origin balance increased, which is less typical for outgoing fraud.");
+        } else {
+          signals.push("Origin balance movement does not strongly match the amount.");
+        }
+
+        if (Math.abs(destinationGain - values.amount) <= tolerance && destinationGain > 0) {
+          score += 12;
+          signals.push("Destination balance gain closely matches the transaction amount.");
+        } else if (destinationGain <= 0) {
+          score += 8;
+          signals.push("Destination balance did not increase normally.");
+        } else {
+          signals.push("Destination balance movement is partially different from the amount.");
+        }
+
+        if (values.amount > values.oldbalanceOrg && values.oldbalanceOrg > 0) {
+          score += 16;
+          signals.push("Transaction amount is higher than the old origin balance.");
+        }
+
+        if (values.oldbalanceDest === 0 && values.newbalanceDest >= values.amount) {
+          score += 7;
+          signals.push("Destination account started at zero and received funds.");
+        }
+
+        if (
+          values.amount < 10000 &&
+          values.newbalanceOrig > 0 &&
+          originMatchesAmount > tolerance &&
+          destinationMatchesAmount <= tolerance
+        ) {
+          score -= 18;
+          signals.push("Pattern is closer to a normal low-risk balance transfer.");
+        }
+
+        return {
+          score: Math.round(clamp(score, 0, 99)),
+          signals
+        };
+      }
+
+      function showPrediction(values) {
+        const result = scoreTransaction(values);
+        const isFraud = result.score >= 65;
+        const isReview = result.score >= 40 && result.score < 65;
+
+        predictionCard.classList.toggle("fraud", isFraud);
+        predictionCard.classList.toggle("review", isReview);
+        predictionCard.classList.toggle("safe", !isFraud && !isReview);
+        predictionTitle.textContent = isFraud
+          ? "Fraudulent Transaction Detected"
+          : isReview
+            ? "Needs Manual Review"
+            : "Legitimate Transaction";
+        riskFill.style.width = `${result.score}%`;
+        riskScore.textContent = `Risk score: ${result.score}%`;
+        signalList.innerHTML = result.signals.map((signal) => `<li>${signal}</li>`).join("");
+      }
+
+      function fillSample(sample) {
+        Object.entries(sample).forEach(([key, value]) => {
+          fields[key].value = value;
+        });
+        showPrediction(readValues());
+      }
+
+      form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        showPrediction(readValues());
+      });
+
+      document.querySelector("#sampleFraud").addEventListener("click", () => {
+        fillSample({
+          amount: 181000,
+          oldbalanceOrg: 181000,
+          newbalanceOrig: 0,
+          oldbalanceDest: 0,
+          newbalanceDest: 181000
+        });
+      });
+
+      document.querySelector("#sampleSafe").addEventListener("click", () => {
+        fillSample({
+          amount: 2400,
+          oldbalanceOrg: 52000,
+          newbalanceOrig: 49600,
+          oldbalanceDest: 11000,
+          newbalanceDest: 13400
+        });
+      });
+    </script>
+  </body>
+</html>
